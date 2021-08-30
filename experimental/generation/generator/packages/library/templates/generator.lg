@@ -421,14 +421,10 @@
 # operations(entity, values, label)
 -```
 > Define phrase list for '${property} property.
-@ phraselist ${property}Phrases(interchangeable) disabledForAllModels =
-${if(propertySchema.title,
-    `    - ${propertySchema.title}`,
-     synonyms(propertyList(property)))}
+@ list ${propertyEntity()}
+ - ${property}:
+ ${synonyms(propertyList(property))}
 
-> Define property entity and optional value for '${property}' property.
-@ ml ${propertyEntity()} usesFeature ${property}Phrases
-    - @ ${entity} ${entity}
 
 > Define operations on '${property}' property.
 ${defineOperation('Assign', entity)}
@@ -461,8 +457,7 @@ ${substitutions(
 
 # defineOperation(operation, entity)
 -```@ ml ${operation}() usesFeature ${operation}Phrases
-    -@ ml ${propertyEntity()} usesFeature ${propertyEntity()}
-        - @ ${entity} ${entity}
+     - @ ${entity} ${entity}
 ${if(length(entities[entity]) > 1, `    - @ ${entity} ${entity}`, '')}```
 
 # entityValues(values)
