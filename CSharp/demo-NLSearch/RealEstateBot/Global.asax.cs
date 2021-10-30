@@ -11,12 +11,11 @@ using Microsoft.Bot.Builder.Dialogs.Internals;
 using System.Text.RegularExpressions;
 using Microsoft.Bot.Builder.Scorables;
 using Microsoft.Bot.Builder.History;
-using Microsoft.Bot.Builder.Scorables.Internals;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Autofac.Base;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using System.Linq;
+using Microsoft.Bot.Builder.Azure;
+using System.Reflection;
 
 namespace RealEstateBot
 {
@@ -90,6 +89,14 @@ namespace RealEstateBot
 
             Conversation.UpdateContainer(builder =>
             {
+                builder.RegisterModule(new AzureModule(Assembly.GetExecutingAssembly()));
+                var store = new InMemoryDataStore();
+                // var store = new TableBotDataStore(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+
+                builder.Register(c => store)
+                    .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
+                    .AsSelf()
+                    .SingleInstance();
             });
 
             GlobalConfiguration.Configure(WebApiConfig.Register);

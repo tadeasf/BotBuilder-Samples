@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.LUIS.API</RootNamespace>
     <AssemblyName>Microsoft.LUIS.API</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Core\Microsoft.LUIS.API\Application.cs" />
+    <Compile Include="..\Microsoft.LUIS.API\Application.cs" />
     <Compile Include="EnumeratorAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Core\Microsoft.LUIS.API\Subscription.cs" />
+    <Compile Include="..\Microsoft.LUIS.API\Subscription.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
