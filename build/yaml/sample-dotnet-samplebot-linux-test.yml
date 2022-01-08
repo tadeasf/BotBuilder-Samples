@@ -80,7 +80,7 @@ jobs:
       <?xml version="1.0" encoding="utf-8"?>
       <configuration>
         <packageSources>
-          <add key="ConversationalAI" value="https://pkgs.dev.azure.com/FuseLabs/SDK_v4/_packaging/SDK_Dotnet_V4/nuget/v3/index.json" />
+          <add key="SDK_Dotnet_V4" value="https://pkgs.dev.azure.com/FuseLabs/SDK_v4/_packaging/SDK_Dotnet_V4/nuget/v3/index.json" />
         </packageSources>
         <activePackageSource>
           <add key="All" value="(Aggregate source)" />
@@ -163,22 +163,21 @@ jobs:
    
       #$url = "https://feeds.dev.azure.com/ConversationalAI/BotFramework/_apis/packaging/Feeds/SDK/Packages/26dde74d-6079-401c-a9e0-c6d839e02c18/versions?api-version=5.1-preview.1"
    
-      Write-Host "Get latest $packageName version number from Azure ConversationalAI BotFramework SDK feed";
+      Write-Host "Get latest $packageName version number from Azure SDK_DotNet_V4 BotFramework SDK feed";
    
       $RegistryUrlSource = "https://pkgs.dev.azure.com/FuseLabs/SDK_v4/_packaging/SDK_Dotnet_V4/nuget/v3/index.json" 
       $Packagelist = nuget list Microsoft.Bot.Builder.Integration.AspNet.Core -Source "$RegistryUrlSource" -PreRelease -AllVersions;
       " "
       "Available versions:";
-      $PackageList -like "* 5.*" | Select -First 20;
-      $PackageList -like "* 4.*" | Select -First 20;
-
+      $PackageList | Select -First 40;
+      
       [string]$latestVersion = ($PackageList -like "* 4.*" | Select -First 1).Split(" ")[-1];
       " "
       "Latest v4 version:";
       $packageName;
       $latestVersion;
       "##vso[task.setvariable variable=TargetVersion;]$latestVersion";
-    displayName: 'From SDK_DotNet_V4 feed get latest Bot.Builder version number - https://dev.azure.com/ConversationalAI/BotFramework/_packaging?_a=feed&feed=SDK'
+    displayName: 'From SDK_DotNet_V4 feed get latest Bot.Builder version number - https://dev.azure.com/FuseLabs/SDK_v4/_packaging?_a=feed&feed=SDK_Dotnet_V4'
     condition: ${{ and(eq(parameters.testLatestPackage, true), eq(parameters.packageFeed, 'SDK_DotNet_V4')) }}
 
   - powershell: |
