@@ -31,7 +31,7 @@ parameters:
   - name: packageFeed
     displayName: Package feed to use
     type: string
-    default: Azure
+    default: SDK_DotNet_V4
     values:
     - SDK_DotNet_V4
     - Azure
