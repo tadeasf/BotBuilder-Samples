@@ -31,12 +31,12 @@ parameters:
   - name: packageFeed
     displayName: Package feed to use
     type: string
-    default: SDK_DotNet_V4
+    default: Azure
     values:
-    - SDK_DotNet_V4
     - Azure
     - MyGet
     - NuGet
+    - SDK_DotNet_V4
 
 # Run this job every night at 2 AM (PST) on the main branch
 schedules:
